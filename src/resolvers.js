@@ -29,11 +29,11 @@ const resolvers = {
           track,
         };
       } catch (err) {
-          return {
-              code: err.extensions.response.status,
-              success: false,
-              message: err.extensions.response.body,
-              track: null
+        return {
+          code: err.extensions.response.status,
+          success: false,
+          message: err.extensions.response.body,
+          track: null
         };
       }
     },
@@ -50,7 +50,15 @@ const resolvers = {
     modules: ({ id }, _, { dataSources }) => {
       return dataSources.trackAPI.getTrackModules(id);
     },
+    // this is a resolver for Track.durationInSeconds
+    // destructure length (variable name in API) from the parent argument
+    durationInSeconds: ({ length }) => length,
   },
+  Module: {
+    // this is a resolver for Module.durationInSeconds
+    // destructure length (variable name in API) from the parent argument
+    durationInSeconds: ({ length }) => length,
+  }
 };
 
 module.exports = resolvers;
